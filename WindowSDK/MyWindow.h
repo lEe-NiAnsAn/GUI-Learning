@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <Windows.h>
 #include <optional>
@@ -6,33 +6,33 @@
 
 class MyWindow {
 public:
-	explicit MyWindow(std::wstring className);	// ÓĞ²Î¹¹Ôì£¬²»ÔÊĞíÒşÊ½×ª»»
-	~MyWindow();	// ÎŞ²ÎÎö¹¹º¯Êı
-	MyWindow(const MyWindow& other) = delete;	// ½ûÖ¹Ç³¿½±´¹¹Ôì
-	MyWindow(MyWindow&& other) noexcept = delete;	// ½ûÖ¹Éî¿½±´¹¹Ôì
-	MyWindow& operator=(const MyWindow& other) = delete;	// ½ûÖ¹Ç³¿½±´¸³Öµ
-	MyWindow& operator=(MyWindow&& other) noexcept = delete;	// ½ûÖ¹Éî¿½±´¸³Öµ
+	explicit MyWindow(std::wstring className);	// æœ‰å‚æ„é€ ï¼Œä¸å…è®¸éšå¼è½¬æ¢
+	~MyWindow();	// æ— å‚ææ„å‡½æ•°
+	MyWindow(const MyWindow& other) = delete;	// ç¦æ­¢æµ…æ‹·è´æ„é€ 
+	MyWindow(MyWindow&& other) noexcept = delete;	// ç¦æ­¢æ·±æ‹·è´æ„é€ 
+	MyWindow& operator=(const MyWindow& other) = delete;	// ç¦æ­¢æµ…æ‹·è´èµ‹å€¼
+	MyWindow& operator=(MyWindow&& other) noexcept = delete;	// ç¦æ­¢æ·±æ‹·è´èµ‹å€¼
 
 public:
-	// ¶¨Òå¡¢ÖØÔØBeginº¯Êı
+	// å®šä¹‰ã€é‡è½½Beginå‡½æ•°
 	std::optional<bool> Begin(const std::wstring& name);
 	std::optional<bool> Begin(const std::wstring& name, int width, int height);
 	std::optional<bool> Begin(const std::wstring& name, int x, int y, int width, int height);
-	// ¶¨ÒåBeginAtº¯Êı
+	// å®šä¹‰BeginAtå‡½æ•°
 	std::optional<bool> BeginAt(const std::wstring& name, int x, int y);
-	// ¶¨Òå´°¿Ú¹ı³Ìº¯Êı
+	// å®šä¹‰çª—å£è¿‡ç¨‹å‡½æ•°
 	static LRESULT CALLBACK MessageProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
-	// ¶¨Òå´¦Àí¹ı³Ìº¯Êı
+	// å®šä¹‰å¤„ç†è¿‡ç¨‹å‡½æ•°
 	LRESULT CALLBACK HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 private:
-	std::wstring m_className;	// ´°¿ÚÀàÃû
-	HINSTANCE m_hinstance = GetModuleHandle(nullptr);	// ÊµÀı¾ä±ú
-	HWND m_hwnd = nullptr;	//´°¿Ú¾ä±ú
-	int m_x = CW_USEDEFAULT;	// ´°¿ÚX×ø±ê
-	int m_y = CW_USEDEFAULT;	//´°¿ÚY×ø±ê
-	int m_width = CW_USEDEFAULT;	// ´°¿Ú¿í¶È
-	int m_height = CW_USEDEFAULT;	//´°¿Ú¸ß¶È
+	std::wstring m_className;	// çª—å£ç±»å
+	HINSTANCE m_hinstance = GetModuleHandle(nullptr);	// å®ä¾‹å¥æŸ„
+	HWND m_hwnd = nullptr;	//çª—å£å¥æŸ„
+	int m_x = CW_USEDEFAULT;	// çª—å£Xåæ ‡
+	int m_y = CW_USEDEFAULT;	//çª—å£Yåæ ‡
+	int m_width = CW_USEDEFAULT;	// çª—å£å®½åº¦
+	int m_height = CW_USEDEFAULT;	//çª—å£é«˜åº¦
 	Gdi m_gdi;
 
 public:

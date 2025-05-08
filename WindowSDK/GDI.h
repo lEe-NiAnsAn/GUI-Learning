@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <Windows.h>
 class Gdi {
@@ -11,7 +11,7 @@ public:
 	Gdi operator=(Gdi&& other) noexcept = delete;
 
 public:
-	void OnPaint(HWND hwnd);
+	void drawTextWithFont(HWND hwnd);
 
 private:
 	std::wstring m_text = L"Hello Win32 Window!";

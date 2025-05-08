@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 #include "MyWindow.h"
 class Tool {
 public:
-    // ´íÎóĞÅÏ¢ÏÔÊ¾
+    // é”™è¯¯ä¿¡æ¯æ˜¾ç¤º
     static void FormatErrorMsg(DWORD errorCode);
 };

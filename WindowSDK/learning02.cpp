@@ -1,11 +1,11 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <string>
 
-// ÉùÃ÷Ò»¸ö´íÎóÂë×Ö·û´®ÏÔÊ¾º¯Êý
+// å£°æ˜Žä¸€ä¸ªé”™è¯¯ç å­—ç¬¦ä¸²æ˜¾ç¤ºå‡½æ•°
 void FormatErrorMsg(DWORD errorCode) {
-	wchar_t* buf;   // ¶¨ÒåÒ»¸öÖ¸Ïò´íÎó×Ö·û´®µÄÖ¸Õë´¢´æ´íÎóÐÅÏ¢
-	// µ÷ÓÃFormatMessageº¯Êý»ñÈ¡´íÎóÐÅÏ¢ÖÁbuf×Ö·û´®
-	// ²ÎÊý£º¿ØÖÆÐÅÏ¢¡¢Ô´¾ä±ú¡¢´íÎóÂë¡¢ÓïÑÔID¡¢Êä³ö»º³åÇø¡¢»º³åÇø´óÐ¡¡¢ÊäÈë²ÎÊý
+	wchar_t* buf;   // å®šä¹‰ä¸€ä¸ªæŒ‡å‘é”™è¯¯å­—ç¬¦ä¸²çš„æŒ‡é’ˆå‚¨å­˜é”™è¯¯ä¿¡æ¯
+	// è°ƒç”¨FormatMessageå‡½æ•°èŽ·å–é”™è¯¯ä¿¡æ¯è‡³bufå­—ç¬¦ä¸²
+	// å‚æ•°ï¼šæŽ§åˆ¶ä¿¡æ¯ã€æºå¥æŸ„ã€é”™è¯¯ç ã€è¯­è¨€IDã€è¾“å‡ºç¼“å†²åŒºã€ç¼“å†²åŒºå¤§å°ã€è¾“å…¥å‚æ•°
     FormatMessage(
         FORMAT_MESSAGE_ALLOCATE_BUFFER |
         FORMAT_MESSAGE_FROM_SYSTEM |
@@ -22,21 +22,21 @@ void FormatErrorMsg(DWORD errorCode) {
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                     PWSTR pCmdLine, int nCmdShow) {
-    // ¶¨ÒåÒ»¸ö´°¿Ú½á¹¹Ìå
+    // å®šä¹‰ä¸€ä¸ªçª—å£ç»“æž„ä½“
     WNDCLASSEX wc = { 0 };
-    // ³õÊ¼»¯´°¿ÚÀà½á¹¹Ìå£¬Î´¸³Öµ³ÉÔ±Ä¬ÈÏÖµÎª0
-    wc.cbSize = sizeof(WNDCLASSEX); // ÉèÖÃ½á¹¹Ìå´óÐ¡
+    // åˆå§‹åŒ–çª—å£ç±»ç»“æž„ä½“ï¼Œæœªèµ‹å€¼æˆå‘˜é»˜è®¤å€¼ä¸º0
+    wc.cbSize = sizeof(WNDCLASSEX); // è®¾ç½®ç»“æž„ä½“å¤§å°
     std::wstring className = L"MyWindowClass";
-    wc.lpszClassName = className.c_str(); // ÉèÖÃ´°¿ÚÀàÃû³Æ
-    wc.lpfnWndProc = DefWindowProc; // ÉèÖÃ´°¿Ú¹ý³Ìº¯Êý
-    wc.hInstance = hInstance; // ÉèÖÃÊµÀý¾ä±ú
+    wc.lpszClassName = className.c_str(); // è®¾ç½®çª—å£ç±»åç§°
+    wc.lpfnWndProc = DefWindowProc; // è®¾ç½®çª—å£è¿‡ç¨‹å‡½æ•°
+    wc.hInstance = hInstance; // è®¾ç½®å®žä¾‹å¥æŸ„
 
-    // ×¢²á´°¿ÚÀà£¬²¢»ñÈ¡·µ»ØÖµ
+    // æ³¨å†Œçª—å£ç±»ï¼Œå¹¶èŽ·å–è¿”å›žå€¼
     ATOM ret = RegisterClassEx(&wc);
-    ret = RegisterClassEx(&wc); // ÖØ¸´×¢²á£¨´íÎó£©
+    ret = RegisterClassEx(&wc); // é‡å¤æ³¨å†Œï¼ˆé”™è¯¯ï¼‰
     if (!ret) {
-        DWORD errorCode = GetLastError(); // »ñÈ¡´íÎó´úÂë
-		FormatErrorMsg(errorCode);  // Ê¹ÓÃº¯ÊýÏÔÊ¾´íÎó×Ö·û´®
-        return errorCode; // ×¢²áÊ§°Ü(ret==0)£¬·µ»Ø´íÎó
+        DWORD errorCode = GetLastError(); // èŽ·å–é”™è¯¯ä»£ç 
+		FormatErrorMsg(errorCode);  // ä½¿ç”¨å‡½æ•°æ˜¾ç¤ºé”™è¯¯å­—ç¬¦ä¸²
+        return errorCode; // æ³¨å†Œå¤±è´¥(ret==0)ï¼Œè¿”å›žé”™è¯¯
     }
 }

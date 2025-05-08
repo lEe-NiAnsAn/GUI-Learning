@@ -1,23 +1,23 @@
-#include "MyWindow.h"
+ï»¿#include "MyWindow.h"
 #include "Tool.h"
 
 int MyWindow::s_windowCount = 0;
 
 MyWindow::MyWindow(std::wstring className) : 
-	m_className(std::move(className)) {	// £¨³ÉÔ±±äÁ¿£©ÀàÃû
-	WNDCLASSEX wc = { 0 };	// ³õÊ¼»¯´°¿ÚÀà
-	wc.cbSize = sizeof(WNDCLASSEX);	// ´°¿ÚÀà´óĞ¡
-	wc.lpszClassName = m_className.c_str();	// ´°¿ÚÀàÃû
-	wc.lpfnWndProc = MessageProc;	// ´°¿Ú¹ı³Ìº¯Êı
-	wc.hbrBackground = CreateSolidBrush(RGB(56, 56, 56));	// ´°¿Ú±³¾°ÑÕÉ«
+	m_className(std::move(className)) {	// ï¼ˆæˆå‘˜å˜é‡ï¼‰ç±»å
+	WNDCLASSEX wc = { 0 };	// åˆå§‹åŒ–çª—å£ç±»
+	wc.cbSize = sizeof(WNDCLASSEX);	// çª—å£ç±»å¤§å°
+	wc.lpszClassName = m_className.c_str();	// çª—å£ç±»å
+	wc.lpfnWndProc = MessageProc;	// çª—å£è¿‡ç¨‹å‡½æ•°
+	wc.hbrBackground = CreateSolidBrush(RGB(56, 56, 56));	// çª—å£èƒŒæ™¯é¢œè‰²
 	if (ATOM ret = RegisterClassEx(&wc); !ret) {
 		Tool::FormatErrorMsg(GetLastError());
 	}
 }
 
 MyWindow::~MyWindow() {
-	DestroyWindow(m_hwnd);	// Ïú»Ùµ±Ç°´°¿Ú
-	UnregisterClass(m_className.c_str(), m_hinstance);	// È¡Ïû×¢²á
+	DestroyWindow(m_hwnd);	// é”€æ¯å½“å‰çª—å£
+	UnregisterClass(m_className.c_str(), m_hinstance);	// å–æ¶ˆæ³¨å†Œ
 }
 
 std::optional<bool> MyWindow::Begin(const std::wstring& name) {
@@ -25,7 +25,7 @@ std::optional<bool> MyWindow::Begin(const std::wstring& name) {
 		m_x, m_y,
 		m_width, m_height,
 		nullptr, nullptr,
-		m_hinstance, this);	// ´«ÈëthisÖ¸ÕëÒÔ±ã¾²Ì¬µÄ»Øµ÷º¯Êı¿É·ÃÎÊ
+		m_hinstance, this);	// ä¼ å…¥thisæŒ‡é’ˆä»¥ä¾¿é™æ€çš„å›è°ƒå‡½æ•°å¯è®¿é—®
 	if (!wnd) {
 		Tool::FormatErrorMsg(GetLastError());
 		return false;
@@ -59,10 +59,10 @@ std::optional<bool> MyWindow::BeginAt(const std::wstring& name, int x, int y) {
 }
 
 LRESULT CALLBACK MyWindow::MessageProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
-	static MyWindow* pWnd = nullptr;	// ¸Ã´°¿ÚËùÓĞµÄÏûÏ¢Ö¸Õë¹²ÓÃ
-	if (msg == WM_CREATE && pWnd == nullptr) {	// Ê×´Î´´½¨
+	static MyWindow* pWnd = nullptr;	// è¯¥çª—å£æ‰€æœ‰çš„æ¶ˆæ¯æŒ‡é’ˆå…±ç”¨
+	if (msg == WM_CREATE && pWnd == nullptr) {	// é¦–æ¬¡åˆ›å»º
 		const CREATESTRUCT* const pCreate = reinterpret_cast<CREATESTRUCT*>(lparam); 
-		pWnd = static_cast<MyWindow*>(pCreate->lpCreateParams);	// ½«´°¿ÚÏûÏ¢Ö¸Õë¸³ÖµÖÁ¼ÇÂ¼Ö¸Õë
+		pWnd = static_cast<MyWindow*>(pCreate->lpCreateParams);	// å°†çª—å£æ¶ˆæ¯æŒ‡é’ˆèµ‹å€¼è‡³è®°å½•æŒ‡é’ˆ
 	}
 	if (pWnd != nullptr) {
 		return pWnd->HandleMessage(hwnd, msg, wparam, lparam);
@@ -76,13 +76,13 @@ LRESULT CALLBACK MyWindow::HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPA
 		OutputDebugString(L"window is created\n");
 		break;
 	case WM_PAINT:
-		m_gdi.OnPaint(hwnd);	// »æÖÆ
+		m_gdi.drawTextWithFont(hwnd);	// ç»˜åˆ¶
 		break;
 	case WM_CLOSE:
-		DestroyWindow(hwnd);	// ½ö¹Ø±Õµ±Ç°´°¿Ú
+		DestroyWindow(hwnd);	// ä»…å…³é—­å½“å‰çª—å£
 		return 0;
 	case WM_DESTROY:
-		if (--s_windowCount == 0) {	// ËùÓĞ´°¿Ú¹Ø±ÕºóÖ´ĞĞÍË³ö
+		if (--s_windowCount == 0) {	// æ‰€æœ‰çª—å£å…³é—­åæ‰§è¡Œé€€å‡º
 			PostQuitMessage(0);
 		}
 		break;

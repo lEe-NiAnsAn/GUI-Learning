@@ -1,4 +1,4 @@
-// ²ÉÓÃ¶àÎÄ¼ş·½Ê½±àĞ´
+ï»¿// é‡‡ç”¨å¤šæ–‡ä»¶æ–¹å¼ç¼–å†™
 #include <windows.h>
 #include "MyWindow.h"
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {

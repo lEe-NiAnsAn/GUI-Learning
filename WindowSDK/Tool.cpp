@@ -1,4 +1,4 @@
-#include "Tool.h"
+﻿#include "Tool.h"
 void Tool::FormatErrorMsg(DWORD errorCode) {
     wchar_t* buf;
     FormatMessage(
