@@ -29,3 +29,7 @@ void Gdi::drawTextWithFont(HWND hwnd) {
 	DeleteObject(hFont);	// 卸载字体
 	EndPaint(hwnd, &ps);	// 结束绘制
 }
+
+void Gdi::drawSimpleDepiction(HWND hwnd) {
+
+}

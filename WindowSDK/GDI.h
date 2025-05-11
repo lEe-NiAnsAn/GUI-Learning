@@ -12,6 +12,7 @@ public:
 
 public:
 	void drawTextWithFont(HWND hwnd);
+	void drawSimpleDepiction(HWND hwnd);
 
 private:
 	std::wstring m_text = L"Hello Win32 Window!";

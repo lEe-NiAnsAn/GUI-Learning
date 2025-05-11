@@ -4,6 +4,9 @@
 #include <optional>
 #include "GDI.h"
 
+#define DRAWTEXT 0
+#define DRAWDEPICTION 1
+
 class MyWindow {
 public:
 	explicit MyWindow(std::wstring className);	// 有参构造，不允许隐式转换
@@ -20,6 +23,8 @@ public:
 	std::optional<bool> Begin(const std::wstring& name, int x, int y, int width, int height);
 	// 定义BeginAt函数
 	std::optional<bool> BeginAt(const std::wstring& name, int x, int y);
+	// 定义绘制方式选择函数
+	void drawType(int type);
 	// 定义窗口过程函数
 	static LRESULT CALLBACK MessageProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 	// 定义处理过程函数
@@ -33,6 +38,7 @@ private:
 	int m_y = CW_USEDEFAULT;	//窗口Y坐标
 	int m_width = CW_USEDEFAULT;	// 窗口宽度
 	int m_height = CW_USEDEFAULT;	//窗口高度
+	int m_type = DRAWTEXT; // 绘制方式
 	Gdi m_gdi;
 
 public:

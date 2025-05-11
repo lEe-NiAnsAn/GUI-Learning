@@ -58,6 +58,10 @@ std::optional<bool> MyWindow::BeginAt(const std::wstring& name, int x, int y) {
 	return Begin(name);
 }
 
+void MyWindow::drawType(int type) {
+	m_type = type;
+}
+
 LRESULT CALLBACK MyWindow::MessageProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 	static MyWindow* pWnd = nullptr;	// 该窗口所有的消息指针共用
 	if (msg == WM_CREATE && pWnd == nullptr) {	// 首次创建
@@ -76,7 +80,12 @@ LRESULT CALLBACK MyWindow::HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPA
 		OutputDebugString(L"window is created\n");
 		break;
 	case WM_PAINT:
-		m_gdi.drawTextWithFont(hwnd);	// 绘制
+		if (m_type == DRAWTEXT) {
+			m_gdi.drawTextWithFont(hwnd);	// 绘制文本
+		}
+		if (m_type == DRAWDEPICTION) {
+			m_gdi.drawTextWithFont(hwnd);	// 绘制简单图形
+		}
 		break;
 	case WM_CLOSE:
 		DestroyWindow(hwnd);	// 仅关闭当前窗口
