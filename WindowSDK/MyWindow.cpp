@@ -3,7 +3,7 @@
 
 int MyWindow::s_windowCount = 0;
 
-MyWindow::MyWindow(std::wstring className) : 
+MyWindow::MyWindow(std::wstring className) :
 	m_className(std::move(className)) {	// （成员变量）类名
 	WNDCLASSEX wc = { 0 };	// 初始化窗口类
 	wc.cbSize = sizeof(WNDCLASSEX);	// 窗口类大小
@@ -13,6 +13,10 @@ MyWindow::MyWindow(std::wstring className) :
 	if (ATOM ret = RegisterClassEx(&wc); !ret) {
 		Tool::FormatErrorMsg(GetLastError());
 	}
+}
+
+void MyWindow::drawType(int type) {
+	m_type = type;	// 自定义绘制方式
 }
 
 MyWindow::~MyWindow() {
@@ -58,10 +62,6 @@ std::optional<bool> MyWindow::BeginAt(const std::wstring& name, int x, int y) {
 	return Begin(name);
 }
 
-void MyWindow::drawType(int type) {
-	m_type = type;
-}
-
 LRESULT CALLBACK MyWindow::MessageProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 	static MyWindow* pWnd = nullptr;	// 该窗口所有的消息指针共用
 	if (msg == WM_CREATE && pWnd == nullptr) {	// 首次创建
@@ -83,8 +83,8 @@ LRESULT CALLBACK MyWindow::HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPA
 		if (m_type == DRAWTEXT) {
 			m_gdi.drawTextWithFont(hwnd);	// 绘制文本
 		}
-		if (m_type == DRAWDEPICTION) {
-			m_gdi.drawTextWithFont(hwnd);	// 绘制简单图形
+		else if (m_type == DRAWDEPICTION) {
+			m_gdi.drawSimpleDepiction(hwnd);	// 绘制简单图形
 		}
 		break;
 	case WM_CLOSE:

@@ -23,12 +23,12 @@ public:
 	std::optional<bool> Begin(const std::wstring& name, int x, int y, int width, int height);
 	// 定义BeginAt函数
 	std::optional<bool> BeginAt(const std::wstring& name, int x, int y);
-	// 定义绘制方式选择函数
-	void drawType(int type);
 	// 定义窗口过程函数
 	static LRESULT CALLBACK MessageProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 	// 定义处理过程函数
 	LRESULT CALLBACK HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
+	// 定义绘制方式选择函数
+	void drawType(int type);
 
 private:
 	std::wstring m_className;	// 窗口类名
@@ -38,8 +38,8 @@ private:
 	int m_y = CW_USEDEFAULT;	//窗口Y坐标
 	int m_width = CW_USEDEFAULT;	// 窗口宽度
 	int m_height = CW_USEDEFAULT;	//窗口高度
-	int m_type = DRAWTEXT; // 绘制方式
 	Gdi m_gdi;
+	int m_type = DRAWTEXT; // 绘制方式
 
 public:
 	static int s_windowCount;

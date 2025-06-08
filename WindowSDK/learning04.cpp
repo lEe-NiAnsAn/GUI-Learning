@@ -5,6 +5,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	MyWindow wnd1(L"classname1_");
 	wnd1.Begin(L"window1");
 	wnd1.Begin(L"window2");
+	MyWindow wnd2(L"classname2_");
+	wnd2.drawType(DRAWDEPICTION);
+	wnd2.Begin(L"window3");
 
 
 	MSG msg;
